@@ -1,0 +1,33 @@
+node_modules/
+dist/
+.astro/
+.vercel/
+.netlify/
+
+# Logs
+*.log
+
+# Env / secrets
+.env
+.env.*
+!.env.example
+
+# DANE PRYWATNE / PII — nigdy nie commitować
+leads/
+_leads*/
+*.csv
+materialy/
+archive/logs/
+
+# OS / IDE
+.DS_Store
+Thumbs.db
+*.tmp
+.vscode/
+.idea/
+
+# Local QA / temp render scripts
+_qa_*.ps1
+
+# Archived / unused assets (not for production)
+archive/

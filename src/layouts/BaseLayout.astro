@@ -1,0 +1,123 @@
+---
+import "../styles/global.css";
+import { home } from "../content/home";
+
+type Props = {
+  title: string;
+  description: string;
+  lang: string;
+  altPath: string;
+};
+
+const SITE = "https://atriopelago.pl";
+const { title, description, lang, altPath: _altPath } = Astro.props;
+const canonicalPath = lang === "pl" ? "/" : "/en/";
+const canonicalUrl = `${SITE}${canonicalPath}`;
+const ogLocale = lang === "pl" ? "pl_PL" : "en_US";
+const ogLocaleAlt = lang === "pl" ? "en_US" : "pl_PL";
+
+const orgSchema = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "@id": `${SITE}/#org`,
+  name: "Atriopelago",
+  description,
+  url: SITE,
+  email: "officepelago@gmail.com",
+  areaServed: { "@type": "Country", name: "Poland" },
+  knowsLanguage: ["pl", "en"],
+  priceRange: "1200-7380 PLN",
+  address: { "@type": "PostalAddress", addressCountry: "PL" },
+  serviceType: [
+    "Meta Ads management for small tourism properties (Facebook + Instagram)",
+    "PL+EN landing pages and bilingual hospitality copywriting",
+    "Short-form video production for hospitality (AI + native footage)",
+    "Seasonal social media content calendars (organic IG + FB)",
+    "Photo selection, light retouch and shoot brief coordination",
+    "Monthly marketing reports with GA4 + Meta Pixel analytics",
+    "SEO content production for tourism (PL+EN blog posts, schema markup)",
+    "Email automation setup for booking funnels and inquiry nurture sequences"
+  ],
+  founder: [
+    { "@type": "Person", name: "Jakub Bartoszak" },
+    { "@type": "Person", name: "Bartek" }
+  ],
+  image: `${SITE}/assets/og-image.jpg`,
+  logo: `${SITE}/assets/og-image.jpg`,
+  hasMap: "https://maps.google.com/?cid=7375696713880557104",
+  sameAs: ["https://maps.google.com/?cid=7375696713880557104"],
+  contactPoint: {
+    "@type": "ContactPoint",
+    email: "officepelago@gmail.com",
+    contactType: "sales",
+    availableLanguage: ["pl", "en"]
+  }
+};
+
+const faqItems = home[lang === "en" ? "en" : "pl"].faq?.items ?? [];
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  mainEntity: faqItems.map(([q, a]) => ({
+    "@type": "Question",
+    name: q,
+    acceptedAnswer: { "@type": "Answer", text: a }
+  }))
+};
+---
+
+<!doctype html>
+<html lang={lang}>
+  <head>
+    <script is:inline>document.documentElement.classList.add("js")</script>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <meta name="robots" content="index,follow" />
+    <meta name="theme-color" content="#11140f" />
+
+    <link rel="canonical" href={canonicalUrl} />
+    <link rel="alternate" hreflang="pl" href={`${SITE}/`} />
+    <link rel="alternate" hreflang="en" href={`${SITE}/en/`} />
+    <link rel="alternate" hreflang="x-default" href={`${SITE}/`} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Atriopelago" />
+    <meta property="og:locale" content={ogLocale} />
+    <meta property="og:locale:alternate" content={ogLocaleAlt} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={`${SITE}/assets/og-image.jpg`} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={`${SITE}/assets/og-image.jpg`} />
+
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+
+    <link rel="preload" as="image" href="/assets/hero-bg.webp" fetchpriority="high" />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Alegreya+Sans:wght@400;500;700&display=swap" />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
+    <noscript>
+      <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Alegreya+Sans:wght@400;500;700&display=swap" rel="stylesheet" />
+    </noscript>
+
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(orgSchema)}></script>
+    <script type="application/ld+json" is:inline set:html={JSON.stringify(faqSchema)}></script>
+
+    <script is:inline defer src="https://cloud.umami.is/script.js" data-website-id="d8c542da-0c99-41aa-9b3d-7ba534286f14"></script>
+
+    <title>{title}</title>
+  </head>
+  <body>
+    <a href="#main" class="skip-link">{lang === "pl" ? "Przejdź do treści" : "Skip to content"}</a>
+    <div class="grain-overlay" aria-hidden="true"></div>
+    <slot />
+  </body>
+</html>

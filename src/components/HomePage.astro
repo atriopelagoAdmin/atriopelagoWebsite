@@ -1,0 +1,1405 @@
+---
+import type { Locale } from "@/content/home";
+import { home } from "@/content/home";
+
+type Props = {
+  locale: Locale;
+};
+
+const content = home[Astro.props.locale];
+const isPl = content.lang === "pl";
+const altLang = isPl ? "en" : "pl";
+const langSwitchLabel = isPl ? "Switch language to English" : "Przełącz język na polski";
+const calComUrl = "https://cal.com/atriopelago/discovery";
+const reviewHref = calComUrl;
+const assets = {
+  hero: "/assets/hero-bg.webp",
+  audience: [
+    "/assets/hf_20260505_024236_0303f0ce-fb00-4a72-8682-3a662e6d4c1d.webp",
+    "/assets/hf_20260505_024239_f669a813-9137-4536-be4a-2a8e8c91592b.webp",
+    "/assets/hf_20260505_024246_604601fd-f229-4806-9f5c-2ab8a59da480.webp"
+  ],
+  case: [
+    "/assets/case-yachtfun.webp",
+    "/assets/case-tiande-rollup.webp"
+  ],
+  review: "/assets/review-bg.webp"
+};
+
+const marketNotes = isPl
+  ? [
+      ["Luka po Profitroomie", "Profitroom porzucił segment 4-12 pokoi w 2022 — przeszli na hotele 40+ pokoi. Hotres robi silnik rezerwacji bez marketingu. Freelancerzy Useme tłumaczą Google Translate. Atriopelago siedzi w luce."],
+      ["Mechanika, nie obietnica", "Nie obiecujemy konkretnej liczby rezerwacji — bo to zależy od oferty, ceny i sezonu. Obiecujemy mechanikę: ile reklam, ile kreacji, ile raportów. Płacisz za system testowy, nie za szczęście."],
+      ["Fair exchange early bird", "Pierwszych 5 klientów Pakietu B przed 31.08.2026 płaci 4 500 zł zamiast 4 500-6 000 wg skali. Ty dostajesz lepszą cenę, my dostajemy proof — honest > flashy."]
+    ]
+  : [
+      ["The gap Profitroom left", "Profitroom abandoned 4-12 room properties in 2022 — they pivoted to 40+ room hotels. Hotres runs booking engines without marketing. Useme freelancers use Google Translate. Atriopelago sits in the gap."],
+      ["Mechanics, not promises", "We don't promise a specific number of bookings — that depends on your offer, price and season. We promise mechanics: how many ads, how many creatives, how many reports. You pay for a testing system, not for luck."],
+      ["Fair-exchange early bird", "First 5 Package B clients before 31.08.2026 pay 4,500 PLN instead of the 4,500-6,000 scale range. You get a better price, we get proof — honest > flashy."]
+    ];
+
+const videoSlots = isPl
+  ? [
+      ["Arrival", "Wejście, recepcja, pierwszy zapach miejsca", "12s hero loop"],
+      ["Stay", "Pokój, światło, detal, śniadanie, rytm dnia", "15s social reel"],
+      ["Decision", "CTA, oferta sezonowa, droga do zapytania", "9:16 ad cut"]
+    ]
+  : [
+      ["Arrival", "Entrance, reception, first sense of place", "12s hero loop"],
+      ["Stay", "Room, light, detail, breakfast, rhythm of the day", "15s social reel"],
+      ["Decision", "CTA, seasonal offer, inquiry path", "9:16 ad cut"]
+    ];
+---
+
+<div class="site">
+  <header class="nav-bar" id="nav">
+    <div class="container nav-inner">
+      <a class="brand" href={content.localePath} aria-label="Atriopelago home">
+        Atrio<span>pelago</span>
+      </a>
+      <nav class="nav-links" aria-label="Main navigation">
+        <a href="#work">{content.nav.work}</a>
+        <a href="#packages">{content.nav.offer}</a>
+        <a href="#process">{content.nav.process}</a>
+        <a href="#review" class="nav-cta">{content.nav.review}</a>
+        <a href={content.altPath} class="lang-link" hreflang={altLang} lang={altLang} aria-label={langSwitchLabel}>{content.nav.lang}</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="hero" id="top">
+      <div class="hero-media" aria-hidden="true">
+        <img src={assets.hero} alt="" loading="eager" fetchpriority="high" decoding="async" width="1600" height="900" />
+        <div class="hero-vignette"></div>
+      </div>
+      <div class="container hero-grid">
+        <div class="hero-copy">
+          <span class="eyebrow reveal">{content.hero.eyebrow}</span>
+          <h1 class="hero-title reveal">{content.hero.title}</h1>
+          <p class="lead hero-lead reveal">{content.hero.lead}</p>
+          <div class="hero-actions reveal">
+            <a href="#review" class="btn btn-primary">{content.hero.primaryCta}</a>
+            <a href="#packages" class="btn">{content.hero.secondaryCta}</a>
+          </div>
+        </div>
+
+        <aside class="review-panel reveal" aria-label={content.review.title}>
+          <span>{content.hero.mediaLabel}</span>
+          <h2>{content.hero.mediaTitle}</h2>
+          <p>{content.hero.mediaCopy}</p>
+          <div class="review-panel-meta">
+            <strong>PL+EN</strong>
+            <strong>SEO</strong>
+            <strong>Video slot</strong>
+          </div>
+        </aside>
+      </div>
+    </section>
+
+    <section class="proof-strip" aria-label={isPl ? "Dowody" : "Proof"}>
+      <div class="container proof-inner">
+        {content.proof.map((item) => <span>{item}</span>)}
+      </div>
+    </section>
+
+    <section class="section light-section">
+      <div class="container editorial-grid">
+        <div>
+          <span class="eyebrow dark">{content.problem.eyebrow}</span>
+          <h2 class="display dark-display">{content.problem.title}</h2>
+        </div>
+        <ol class="issue-list">
+          {content.problem.points.map((point, i) => (
+            <li class="reveal">
+              <span>{String(i + 1).padStart(2, "0")}</span>
+              <p>{point}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </section>
+
+    <section class="section dark-section">
+      <div class="container">
+        <div class="section-heading">
+          <span class="eyebrow">{content.audiences.eyebrow}</span>
+          <h2 class="display">{content.audiences.title}</h2>
+        </div>
+        <div class="audience-grid">
+          {content.audiences.items.map((item, i) => (
+            <article class="audience-tile reveal">
+              <img src={assets.audience[i]} alt={item.title} loading="lazy" decoding="async" width="800" height="1040" />
+              <div>
+                <span>0{i + 1}</span>
+                <h3>{item.title}</h3>
+                <p>{item.copy}</p>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section light-section">
+      <div class="container split-section">
+        <div>
+          <span class="eyebrow dark">{content.solution.eyebrow}</span>
+          <h2 class="display dark-display">{content.solution.title}</h2>
+        </div>
+        <div class="solution-list">
+          {content.solution.items.map((item, i) => (
+            <div class="solution-row reveal">
+              <span>{String(i + 1).padStart(2, "0")}</span>
+              <p>{item}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark-section market-section">
+      <div class="container">
+        <div class="section-heading compact">
+          <span class="eyebrow">{isPl ? "Pozycjonowanie" : "Positioning"}</span>
+          <h2 class="display">{isPl ? "Dlaczego Atriopelago — w trzech zdaniach." : "Why Atriopelago — in three sentences."}</h2>
+        </div>
+        <div class="market-grid">
+          {marketNotes.map(([title, copy]) => (
+            <article class="market-note reveal">
+              <h3>{title}</h3>
+              <p>{copy}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section light-section" id="packages">
+      <div class="container">
+        <div class="section-heading left">
+          <span class="eyebrow dark">{content.packages.eyebrow}</span>
+          <h2 class="display dark-display">{content.packages.title}</h2>
+        </div>
+        <div class="package-grid">
+          {content.packages.items.map((pkg) => (
+            <article class:list={["package-card", pkg.featured && "featured"]}>
+              {pkg.featured && <span class="package-badge">Core offer</span>}
+              <h3>{pkg.name}</h3>
+              <div class="package-price">{pkg.price}</div>
+              <p class="package-timing">{pkg.timing}</p>
+              <p class="package-desc">{pkg.description}</p>
+              <ul>
+                {pkg.items.map((item) => <li>{item}</li>)}
+              </ul>
+              <a href="#review" class="btn btn-primary">{isPl ? "Wyślij obiekt" : "Send property"}</a>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark-section" id="process">
+      <div class="container">
+        <div class="section-heading left">
+          <span class="eyebrow">{content.process.eyebrow}</span>
+          <h2 class="display">{content.process.title}</h2>
+        </div>
+        <div class="process-grid">
+          {content.process.items.map(([num, title, copy]) => (
+            <article class="process-step reveal">
+              <span>{num}</span>
+              <h3>{title}</h3>
+              <p>{copy}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section light-section" id="work">
+      <div class="container">
+        <div class="section-heading left">
+          <span class="eyebrow dark">{content.cases.eyebrow}</span>
+          <h2 class="display dark-display">{content.cases.title}</h2>
+        </div>
+        <div class="case-stack">
+          {content.cases.items.map((caseItem, i) => (
+            <article class="case-row reveal">
+              <img src={assets.case[i]} alt={caseItem.name} class="case-img" loading="lazy" decoding="async" width="800" height="500" data-proof={i === 1 ? "/assets/proof-tiande-combined.webp" : ""} data-proof-label={caseItem.name} data-proof-href={i === 0 ? "https://itakapresentation.netlify.app" : ""} />
+              <div>
+                <span>{caseItem.label}</span>
+                <h3>{caseItem.name}</h3>
+                <p>{caseItem.summary}</p>
+                <div class="tag-row">
+                  {caseItem.details.map((detail) => <small>{detail}</small>)}
+                </div>
+                {i === 0 ? (
+                  <a class="case-proof" href="https://itakapresentation.netlify.app" target="_blank" rel="noopener">{isPl ? "Zobacz pitch na żywo ↗" : "View live pitch ↗"}</a>
+                ) : (
+                  <button class="case-proof" type="button" data-proof="/assets/proof-tiande-combined.webp" data-proof-label={caseItem.name}>{isPl ? "Zobacz cały rollup ⤢" : "View full roll-up ⤢"}</button>
+                )}
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="section dark-section visual-section">
+      <div class="container split-section">
+        <div>
+          <span class="eyebrow">Video direction</span>
+          <h2 class="display">{isPl ? "Filmiki mogą dojść później. Strona już wie, gdzie je przyjąć." : "The videos can arrive later. The page already knows where they go."}</h2>
+        </div>
+        <div class="video-slot-grid">
+          {videoSlots.map(([title, copy, meta], i) => (
+            <article class="video-slot reveal">
+              <div class="video-frame">
+                <img src={assets.audience[i]} alt="" loading="lazy" decoding="async" width="600" height="933" />
+                <span>{meta}</span>
+              </div>
+              <h3>{title}</h3>
+              <p>{copy}</p>
+            </article>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <section class="review-section" id="review">
+      <img src={assets.review} alt="" loading="lazy" decoding="async" width="1600" height="900" />
+      <div class="review-overlay"></div>
+      <div class="container review-content">
+        <span class="eyebrow">{content.review.eyebrow}</span>
+        <h2 class="display">{content.review.title}</h2>
+        <p>{content.review.copy}</p>
+        <div class="review-fields">
+          {content.review.fields.map((field) => <span>{field}</span>)}
+        </div>
+        <a href={reviewHref} class="btn btn-primary">{content.review.cta}</a>
+
+        <form
+          name="kontakt"
+          method="POST"
+          data-netlify="true"
+          netlify-honeypot="bot-field"
+          class="contact-form"
+          aria-label={isPl ? "Formularz kontaktowy" : "Contact form"}
+        >
+          <input type="hidden" name="form-name" value="kontakt" />
+          <p class="hp-field" hidden>
+            <label>
+              {isPl ? "Nie wypełniaj tego pola" : "Do not fill this field"}:
+              <input name="bot-field" tabindex="-1" autocomplete="off" />
+            </label>
+          </p>
+          <p class="form-row">
+            <label for="cf-name">{isPl ? "Imię" : "Name"} <span aria-hidden="true">*</span></label>
+            <input id="cf-name" name="name" type="text" required aria-required="true" autocomplete="name" />
+          </p>
+          <p class="form-row">
+            <label for="cf-email">E-mail <span aria-hidden="true">*</span></label>
+            <input id="cf-email" name="email" type="email" required aria-required="true" autocomplete="email" />
+          </p>
+          <p class="form-row">
+            <label for="cf-property">{isPl ? "Nazwa obiektu" : "Property name"}</label>
+            <input id="cf-property" name="property" type="text" autocomplete="organization" />
+          </p>
+          <p class="form-row">
+            <label for="cf-message">{isPl ? "Wiadomość" : "Message"} <span aria-hidden="true">*</span></label>
+            <textarea id="cf-message" name="message" rows="4" required aria-required="true"></textarea>
+          </p>
+          <p class="form-note">{isPl ? "Pola oznaczone * są wymagane." : "Fields marked * are required."}</p>
+          <button type="submit" class="btn btn-primary form-submit">{isPl ? "Wyślij zapytanie" : "Send inquiry"}</button>
+        </form>
+      </div>
+    </section>
+
+    <section class="section light-section">
+      <div class="container faq-layout">
+        <div>
+          <span class="eyebrow dark">{content.faq.eyebrow}</span>
+          <h2 class="display dark-display">{content.faq.title}</h2>
+        </div>
+        <div class="faq-grid">
+          {content.faq.items.map(([question, answer]) => (
+            <details class="faq-item">
+              <summary>{question}</summary>
+              <p>{answer}</p>
+            </details>
+          ))}
+        </div>
+      </div>
+    </section>
+    <dialog class="proof-lightbox" aria-label={isPl ? "Podgląd materiału" : "Material preview"}>
+      <button class="proof-close" type="button" aria-label={isPl ? "Zamknij" : "Close"}>×</button>
+      <div class="proof-scroll">
+        <img alt="" />
+      </div>
+    </dialog>
+
+    <script is:inline>
+      (function () {
+        var dlg = document.querySelector(".proof-lightbox");
+        if (!dlg) return;
+        var pImg = dlg.querySelector(".proof-scroll img");
+        var scroller = dlg.querySelector(".proof-scroll");
+        function openProof(src, label) {
+          pImg.setAttribute("src", src);
+          pImg.setAttribute("alt", label || "");
+          if (scroller) scroller.scrollTop = 0;
+          if (typeof dlg.showModal === "function") dlg.showModal();
+          else dlg.setAttribute("open", "");
+        }
+        function closeProof() {
+          if (typeof dlg.close === "function") dlg.close();
+          else dlg.removeAttribute("open");
+          pImg.removeAttribute("src");
+        }
+        document.querySelectorAll("[data-proof]").forEach(function (el) {
+          var p = el.getAttribute("data-proof");
+          if (!p) return;
+          el.style.cursor = "zoom-in";
+          el.addEventListener("click", function () { openProof(p, el.getAttribute("data-proof-label")); });
+        });
+        document.querySelectorAll("[data-proof-href]").forEach(function (el) {
+          var h = el.getAttribute("data-proof-href");
+          if (!h) return;
+          el.style.cursor = "pointer";
+          el.addEventListener("click", function () { window.open(h, "_blank", "noopener"); });
+        });
+        dlg.querySelector(".proof-close").addEventListener("click", closeProof);
+        dlg.addEventListener("click", function (e) { if (e.target === dlg) closeProof(); });
+        dlg.addEventListener("cancel", function () { pImg.removeAttribute("src"); });
+      })();
+    </script>
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <a class="brand footer-brand" href={content.localePath}>Atrio<span>pelago</span></a>
+        <p>{content.footer.tagline}</p>
+        <p class="footer-contact-line">
+          <a href="mailto:officepelago@gmail.com">officepelago@gmail.com</a>
+        </p>
+      </div>
+      <div class="footer-links">
+        <a href="#work">{content.nav.work}</a>
+        <a href="#packages">{content.nav.offer}</a>
+        <a href="#process">{content.nav.process}</a>
+        <a href={reviewHref}>{content.footer.contact}</a>
+        <a href={isPl ? "/polityka-prywatnosci" : "/en/privacy"}>{isPl ? "Polityka prywatności" : "Privacy policy"}</a>
+      </div>
+      <a href={content.altPath} class="lang-link" hreflang={altLang} lang={altLang} aria-label={langSwitchLabel}>{content.nav.lang}</a>
+    </div>
+  </footer>
+
+  <script>
+    import { gsap } from "gsap";
+    import { ScrollTrigger } from "gsap/ScrollTrigger";
+    gsap.registerPlugin(ScrollTrigger);
+
+    gsap.defaults({ ease: "power3.out" });
+
+    const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    if (prefersReduced) {
+      gsap.set(".reveal", { opacity: 1, y: 0 });
+    } else {
+
+    gsap.utils.toArray<HTMLElement>(".reveal").forEach((el) => {
+      gsap.fromTo(el,
+        { y: 28, opacity: 0 },
+        {
+          y: 0,
+          opacity: 1,
+          duration: 0.9,
+          scrollTrigger: {
+            trigger: el,
+            start: "top 88%",
+            once: true
+          }
+        }
+      );
+    });
+
+    const heroImg = document.querySelector(".hero-media img");
+    if (heroImg) {
+      gsap.to(heroImg, {
+        y: 120,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".hero",
+          start: "top top",
+          end: "bottom top",
+          scrub: 0.6
+        }
+      });
+    }
+
+    gsap.utils.toArray<HTMLElement>(".audience-tile img").forEach((img) => {
+      gsap.from(img, {
+        scale: 1.12,
+        duration: 1.4,
+        scrollTrigger: {
+          trigger: img.closest(".audience-tile"),
+          start: "top 80%",
+          once: true
+        }
+      });
+    });
+
+    }
+
+    const header = document.getElementById("nav");
+    window.addEventListener("scroll", () => {
+      header?.classList.toggle("scrolled", window.scrollY > 80);
+    }, { passive: true });
+  </script>
+</div>
+
+<style>
+  .site {
+    min-height: 100vh;
+  }
+
+  .nav-bar {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 20;
+    padding: 18px 0;
+    transition: background 220ms var(--ease), border-color 220ms var(--ease);
+  }
+
+  .nav-bar.scrolled {
+    border-bottom: 1px solid var(--dark-line);
+    background: rgba(17, 20, 15, 0.84);
+    backdrop-filter: blur(20px);
+  }
+
+  .nav-inner,
+  .nav-links,
+  .hero-actions,
+  .proof-inner,
+  .review-panel-meta,
+  .tag-row,
+  .review-fields,
+  .footer-inner,
+  .footer-links {
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-inner {
+    justify-content: space-between;
+    gap: 24px;
+  }
+
+  .brand {
+    font-family: var(--font-display);
+    font-size: 1.75rem;
+    font-weight: 600;
+    color: var(--paper);
+  }
+
+  .brand span {
+    color: var(--sand);
+  }
+
+  .nav-links {
+    gap: 22px;
+    color: rgba(247, 241, 231, 0.8);
+    font-size: 0.86rem;
+    font-weight: 700;
+  }
+
+  .nav-links a {
+    min-height: 44px;
+    display: inline-flex;
+    align-items: center;
+    padding: 12px 0;
+  }
+
+  .nav-cta {
+    border-bottom: 1px solid var(--sand);
+    color: var(--sand);
+  }
+
+  .lang-link {
+    color: rgba(247, 241, 231, 0.58);
+  }
+
+  .hero {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 120px 0 72px;
+  }
+
+  .hero-media,
+  .hero-media img,
+  .hero-vignette {
+    position: absolute;
+    inset: 0;
+  }
+
+  .hero-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 1;
+  }
+
+  .hero-vignette {
+    background:
+      linear-gradient(90deg, rgba(17, 20, 15, 0.78), rgba(17, 20, 15, 0.32), rgba(17, 20, 15, 0.62)),
+      linear-gradient(180deg, rgba(17, 20, 15, 0.12), rgba(17, 20, 15, 0.78));
+  }
+
+  .hero-grid {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 360px;
+    gap: 56px;
+    align-items: end;
+    min-height: calc(100vh - 192px);
+  }
+
+  .hero-copy {
+    max-width: 790px;
+  }
+
+  .hero-title {
+    margin: 0;
+    font-family: var(--font-display);
+    font-size: 4.6rem;
+    font-weight: 500;
+    line-height: 1.04;
+    letter-spacing: -0.005em;
+    text-wrap: balance;
+  }
+
+  .hero-lead {
+    max-width: 610px;
+    margin-top: 24px;
+  }
+
+  .hero-actions {
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 32px;
+  }
+
+  .review-panel {
+    border: 1px solid rgba(216, 198, 162, 0.22);
+    border-radius: 10px;
+    background: rgba(17, 20, 15, 0.42);
+    backdrop-filter: blur(14px);
+    padding: 24px;
+    max-width: 340px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  }
+
+  .review-panel > span,
+  .review-panel-meta strong {
+    color: var(--sand);
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .review-panel h2 {
+    margin: 12px 0 10px;
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    line-height: 1.1;
+    font-weight: 500;
+  }
+
+  .review-panel p {
+    font-size: 0.92rem;
+    line-height: 1.55;
+  }
+
+  .review-panel p {
+    margin: 0;
+    color: var(--mist);
+  }
+
+  .review-panel-meta {
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 22px;
+  }
+
+  .review-panel-meta strong {
+    border: 1px solid var(--dark-line);
+    padding: 7px 9px;
+    color: var(--paper);
+  }
+
+  .proof-strip {
+    border-top: 1px solid rgba(216, 198, 162, 0.18);
+    border-bottom: 1px solid var(--dark-line);
+    background: var(--forest);
+    padding: 20px 0;
+  }
+
+  .proof-inner span {
+    position: relative;
+  }
+
+  .proof-inner span + span::before {
+    content: "·";
+    position: absolute;
+    left: -18px;
+    color: var(--sand);
+    opacity: 0.5;
+  }
+
+  .proof-inner {
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 18px 32px;
+    color: rgba(247, 241, 231, 0.72);
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .light-section {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  .dark-section {
+    background: var(--ink);
+    color: var(--paper);
+  }
+
+  .dark,
+  .dark-display {
+    color: var(--ink);
+  }
+
+  .editorial-grid,
+  .split-section,
+  .faq-layout {
+    display: grid;
+    grid-template-columns: 0.9fr 1.1fr;
+    gap: 72px;
+    align-items: start;
+  }
+
+  .issue-list {
+    display: grid;
+    gap: 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--light-line);
+  }
+
+  .issue-list li,
+  .solution-row {
+    display: grid;
+    grid-template-columns: 56px 1fr;
+    gap: 18px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--light-line);
+  }
+
+  .issue-list span,
+  .solution-row span {
+    color: var(--copper-text);
+    font-family: var(--font-display);
+    font-size: 1.45rem;
+  }
+
+  .issue-list p,
+  .solution-row p {
+    margin: 0;
+    color: rgba(17, 20, 15, 0.72);
+    font-size: 1.08rem;
+  }
+
+  .section-heading {
+    max-width: 820px;
+    margin: 0 auto 48px;
+    text-align: center;
+  }
+
+  .section-heading.left {
+    margin-left: 0;
+    text-align: left;
+  }
+
+  .section-heading.compact {
+    max-width: 720px;
+  }
+
+  .audience-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .audience-tile {
+    position: relative;
+    min-height: 520px;
+    overflow: hidden;
+    border: 1px solid var(--dark-line);
+    border-radius: 8px;
+    transition: transform 400ms var(--ease), box-shadow 400ms var(--ease);
+  }
+
+  .audience-tile:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.28);
+  }
+
+  .audience-tile img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 700ms var(--ease);
+  }
+
+  .audience-tile:hover img {
+    transform: scale(1.04);
+  }
+
+  .audience-tile::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(17, 20, 15, 0) 35%, rgba(17, 20, 15, 0.92) 100%);
+  }
+
+  .audience-tile div {
+    position: absolute;
+    inset: auto 0 0;
+    z-index: 1;
+    padding: 28px;
+  }
+
+  .audience-tile span,
+  .case-row span {
+    color: var(--sand);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .audience-tile h3,
+  .market-note h3,
+  .process-step h3,
+  .case-row h3,
+  .video-slot h3 {
+    margin: 10px 0 10px;
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 600;
+    line-height: 1;
+  }
+
+  .audience-tile p,
+  .market-note p,
+  .process-step p,
+  .video-slot p {
+    margin: 0;
+    color: var(--mist);
+  }
+
+  .solution-list {
+    border-top: 1px solid var(--light-line);
+  }
+
+  .market-grid,
+  .process-grid,
+  .video-slot-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+  }
+
+  .market-note,
+  .process-step,
+  .video-slot {
+    border: 1px solid var(--dark-line);
+    border-radius: 8px;
+    padding: 26px;
+    background: rgba(247, 241, 231, 0.04);
+    transition: transform 320ms var(--ease), box-shadow 320ms var(--ease), border-color 320ms var(--ease);
+  }
+
+  .market-note:hover,
+  .process-step:hover,
+  .video-slot:hover {
+    transform: translateY(-3px);
+    border-color: rgba(216, 198, 162, 0.2);
+    box-shadow: 0 8px 28px rgba(0, 0, 0, 0.2);
+  }
+
+  .market-note h3,
+  .process-step h3,
+  .video-slot h3 {
+    color: var(--paper);
+  }
+
+  .package-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
+
+  @media (max-width: 1100px) {
+    .package-grid {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+  }
+
+  .package-card {
+    position: relative;
+    display: flex;
+    min-height: 580px;
+    flex-direction: column;
+    border: 1px solid var(--light-line);
+    border-radius: 10px;
+    background: var(--porcelain);
+    padding: 26px 24px;
+    transition: transform 360ms var(--ease), box-shadow 360ms var(--ease);
+  }
+
+  .package-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 36px rgba(0, 0, 0, 0.14);
+  }
+
+  .package-card.featured {
+    background: var(--forest);
+    color: var(--paper);
+    border-color: rgba(216, 198, 162, 0.3);
+    box-shadow: 0 4px 32px rgba(216, 198, 162, 0.12);
+  }
+
+  .package-card.featured:hover {
+    box-shadow: 0 12px 48px rgba(216, 198, 162, 0.22);
+  }
+
+  .package-badge {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    border: 1px solid var(--sand);
+    border-radius: 4px;
+    padding: 6px 9px;
+    color: var(--sand);
+    font-size: 0.74rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .package-card h3 {
+    margin: 0 0 14px;
+    padding-right: 0;
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    line-height: 1.05;
+  }
+
+  .package-card.featured h3 {
+    padding-right: 86px;
+  }
+
+  .package-price {
+    font-family: var(--font-display);
+    font-size: 2.2rem;
+    line-height: 1;
+    color: var(--copper-text);
+  }
+
+  .featured .package-price {
+    color: var(--sand);
+  }
+
+  .package-timing,
+  .package-desc {
+    margin: 10px 0 0;
+    color: rgba(17, 20, 15, 0.68);
+  }
+
+  .featured .package-timing,
+  .featured .package-desc {
+    color: rgba(247, 241, 231, 0.68);
+  }
+
+  .package-card ul {
+    display: grid;
+    gap: 9px;
+    margin: 26px 0 28px;
+    padding: 0;
+    list-style: none;
+  }
+
+  .package-card li {
+    border-top: 1px solid var(--light-line);
+    padding-top: 9px;
+    color: rgba(17, 20, 15, 0.72);
+  }
+
+  .featured li {
+    border-color: rgba(247, 241, 231, 0.14);
+    color: rgba(247, 241, 231, 0.74);
+  }
+
+  .package-card .btn {
+    margin-top: auto;
+  }
+
+  .process-step > span {
+    color: var(--sand);
+    font-family: var(--font-display);
+    font-size: 2.6rem;
+  }
+
+  .case-stack {
+    display: grid;
+    gap: 34px;
+  }
+
+  .case-row {
+    display: grid;
+    grid-template-columns: minmax(300px, 0.88fr) 1fr;
+    gap: 36px;
+    align-items: center;
+    border-top: 1px solid var(--light-line);
+    padding-top: 34px;
+  }
+
+  .case-row img {
+    aspect-ratio: 16 / 10;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .case-row span {
+    color: var(--copper-text);
+  }
+
+  .case-row h3 {
+    color: var(--ink);
+    font-size: 2.4rem;
+  }
+
+  .case-row p {
+    max-width: 60ch;
+    color: rgba(17, 20, 15, 0.72);
+    font-size: 1.05rem;
+  }
+
+  .tag-row {
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 20px;
+  }
+
+  .tag-row small {
+    border: 1px solid var(--light-line);
+    padding: 6px 9px;
+    color: var(--olive);
+    font-size: 0.76rem;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+  .visual-section .split-section {
+    grid-template-columns: 0.78fr 1.22fr;
+  }
+
+  .video-slot-grid {
+    gap: 14px;
+  }
+
+  .video-slot {
+    padding: 16px;
+  }
+
+  .video-frame {
+    position: relative;
+    aspect-ratio: 9 / 14;
+    overflow: hidden;
+    margin-bottom: 18px;
+    background: var(--forest);
+  }
+
+  .video-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0.72;
+  }
+
+  .video-frame span {
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 12px;
+    border: 1px solid var(--dark-line);
+    background: rgba(17, 20, 15, 0.72);
+    padding: 8px;
+    color: var(--paper);
+    font-size: 0.78rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .review-section {
+    position: relative;
+    overflow: hidden;
+    padding: 120px 0;
+  }
+
+  .review-section > img,
+  .review-overlay {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  .review-section > img {
+    object-fit: cover;
+  }
+
+  .review-overlay {
+    background: linear-gradient(180deg, rgba(17, 20, 15, 0.88), rgba(17, 20, 15, 0.8));
+  }
+
+  .review-content {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  .review-content p {
+    max-width: 620px;
+    margin-inline: auto;
+    color: var(--mist);
+    font-size: 1.1rem;
+  }
+
+  .review-fields {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    margin: 28px 0;
+  }
+
+  .review-fields span {
+    border: 1px solid var(--dark-line);
+    background: rgba(247, 241, 231, 0.05);
+    padding: 8px 10px;
+    color: var(--paper);
+    font-size: 0.84rem;
+  }
+
+  .faq-grid {
+    display: grid;
+    gap: 12px;
+  }
+
+  .faq-item {
+    border-top: 1px solid var(--light-line);
+    padding: 18px 0;
+  }
+
+  .faq-item summary {
+    cursor: pointer;
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    line-height: 1.3;
+    padding-right: 24px;
+    position: relative;
+  }
+
+  .faq-item summary::after {
+    content: "+";
+    position: absolute;
+    right: 0;
+    top: 0;
+    font-family: var(--font-body);
+    font-size: 1.3rem;
+    font-weight: 400;
+    color: var(--copper-text);
+    transition: transform 220ms var(--ease);
+  }
+
+  .faq-item[open] summary::after {
+    transform: rotate(45deg);
+  }
+
+  .faq-item p {
+    margin-top: 12px;
+  }
+
+  .faq-item p {
+    max-width: 64ch;
+    color: rgba(17, 20, 15, 0.7);
+  }
+
+  .footer {
+    border-top: 1px solid var(--dark-line);
+    background: var(--forest);
+    padding: 48px 0;
+  }
+
+  .footer-inner {
+    justify-content: space-between;
+    gap: 28px;
+  }
+
+  .footer-brand {
+    display: inline-block;
+    margin-bottom: 10px;
+  }
+
+  .footer p {
+    margin: 0;
+    color: var(--mist);
+  }
+
+  .footer-links {
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 18px;
+    color: var(--mist);
+  }
+
+  @media (max-width: 980px) {
+    /* Keep language switch + primary CTA reachable on mobile; hide only in-page anchors (reachable by scroll). */
+    .nav-links {
+      gap: 14px;
+    }
+
+    .nav-links a:not(.nav-cta):not(.lang-link) {
+      display: none;
+    }
+
+    .hero-grid,
+    .editorial-grid,
+    .split-section,
+    .faq-layout,
+    .visual-section .split-section {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+
+    .hero-title {
+      font-size: 3.4rem;
+      line-height: 1.05;
+    }
+
+    .review-panel {
+      max-width: 520px;
+    }
+
+    .audience-grid,
+    .market-grid,
+    .process-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .package-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .audience-tile {
+      min-height: 420px;
+    }
+
+    .case-row {
+      grid-template-columns: 1fr;
+    }
+
+    .video-slot-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+  }
+
+  @media (max-width: 700px) {
+    .hero {
+      padding-top: 104px;
+    }
+
+    .hero-grid {
+      min-height: auto;
+    }
+
+    .hero-title {
+      font-size: 2.6rem;
+      line-height: 1.08;
+    }
+
+    .proof-inner {
+      justify-content: flex-start;
+    }
+
+    .issue-list li,
+    .solution-row {
+      grid-template-columns: 42px 1fr;
+    }
+
+    .video-slot-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .package-card {
+      min-height: auto;
+    }
+
+    .footer-inner,
+    .footer-links {
+      align-items: flex-start;
+      flex-direction: column;
+    }
+  }
+
+  .contact-form {
+    margin: 30px auto 0;
+    display: grid;
+    gap: 14px;
+    max-width: 560px;
+    text-align: left;
+  }
+
+  .contact-form .hp-field {
+    display: none;
+  }
+
+  .contact-form .form-row {
+    margin: 0;
+    display: grid;
+    gap: 6px;
+  }
+
+  .contact-form label {
+    color: var(--paper);
+    font-size: 0.84rem;
+    font-weight: 700;
+  }
+
+  .contact-form label span {
+    color: var(--sand);
+  }
+
+  .contact-form input,
+  .contact-form textarea {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1px solid rgba(247, 241, 231, 0.45);
+    border-radius: 6px;
+    background: var(--porcelain);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 1rem;
+  }
+
+  .contact-form textarea {
+    min-height: 112px;
+    resize: vertical;
+  }
+
+  .contact-form input:focus-visible,
+  .contact-form textarea:focus-visible {
+    outline: 2px solid var(--sand);
+    outline-offset: 2px;
+    border-color: var(--sand);
+  }
+
+  .contact-form .form-note {
+    margin: 2px 0 4px;
+    color: var(--mist);
+    font-size: 0.82rem;
+  }
+
+  .contact-form .form-submit {
+    justify-self: center;
+  }
+
+  .case-img { cursor: zoom-in; }
+
+  .case-proof {
+    display: inline-flex;
+    align-items: center;
+    margin-top: 16px;
+    padding: 9px 16px;
+    border: 1px solid var(--sand);
+    border-radius: 6px;
+    background: transparent;
+    color: var(--sand);
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s var(--ease), color 0.2s var(--ease);
+  }
+
+  .case-proof:hover { background: var(--sand); color: var(--ink); }
+
+  .proof-lightbox {
+    border: 0;
+    padding: 0;
+    background: transparent;
+    max-width: 94vw;
+    max-height: 94vh;
+    overflow: visible;
+  }
+
+  .proof-lightbox::backdrop { background: rgba(10, 8, 6, 0.9); }
+
+  .proof-scroll {
+    max-height: 92vh;
+    overflow: auto;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+
+  .proof-scroll img {
+    display: block;
+    width: min(540px, 90vw);
+    height: auto;
+  }
+
+  .proof-close {
+    position: fixed;
+    top: 16px;
+    right: 20px;
+    z-index: 5;
+    width: 46px;
+    height: 46px;
+    border: 1px solid var(--sand);
+    border-radius: 50%;
+    background: var(--ink);
+    color: var(--sand);
+    font-size: 1.6rem;
+    line-height: 1;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .proof-close:hover { background: var(--sand); color: var(--ink); }
+</style>

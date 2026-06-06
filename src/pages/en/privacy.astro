@@ -1,0 +1,120 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Privacy policy | Atriopelago"
+  description="How Atriopelago processes personal data: contact form, analytics and your GDPR rights."
+  lang="en"
+  altPath="/polityka-prywatnosci"
+>
+  <main id="main" tabindex="-1" class="section container legal">
+    <span class="eyebrow">Document</span>
+    <h1 class="display">Privacy policy</h1>
+    <p class="lead">Last updated: 3 June 2026.</p>
+
+    <h2>1. Data controller</h2>
+    <p>
+      The controller of your personal data is Atriopelago. For any data-protection
+      matter, contact us at
+      <a href="mailto:officepelago@gmail.com">officepelago@gmail.com</a>.
+    </p>
+
+    <h2>2. What data we collect</h2>
+    <ul>
+      <li>
+        <strong>Contact form:</strong> name, email address, property name and your
+        message, provided voluntarily so we can get back to you.
+      </li>
+      <li>
+        <strong>Analytics (Umami):</strong> anonymous, aggregated visit statistics
+        (visits, entry page, country, device type). Umami uses no cookies and collects
+        no data that identifies you.
+      </li>
+    </ul>
+
+    <h2>3. Purposes and legal basis</h2>
+    <ul>
+      <li>
+        Handling your enquiry — art. 6(1)(b) GDPR (steps toward a contract) and
+        art. 6(1)(f) (our legitimate interest in responding to contact).
+      </li>
+      <li>
+        Statistics and improving the site — art. 6(1)(f) GDPR (legitimate interest),
+        on anonymous data.
+      </li>
+    </ul>
+
+    <h2>4. Cookies</h2>
+    <p>
+      This site uses no tracking or marketing cookies. Our analytics tool Umami works
+      without cookies, so we display no cookie-consent banner. If we add advertising
+      tools in the future (e.g. the Meta pixel), we will ask for your consent first.
+    </p>
+
+    <h2>5. How long we keep data</h2>
+    <p>
+      Form data is kept for as long as needed to handle your enquiry, and then for the
+      limitation period of any potential claims. Analytics data is anonymous and aggregated.
+    </p>
+
+    <h2>6. Recipients</h2>
+    <p>
+      We use trusted providers who process data on our behalf: site hosting (Netlify)
+      and analytics (Umami). We do not sell your data.
+    </p>
+
+    <h2>7. Your rights</h2>
+    <p>
+      You have the right to: access your data, rectify it, erase it, restrict processing,
+      data portability, object to processing, and lodge a complaint with the relevant
+      supervisory authority (in Poland, the President of the Personal Data Protection
+      Office, PUODO). To exercise these rights, email
+      <a href="mailto:officepelago@gmail.com">officepelago@gmail.com</a>.
+    </p>
+
+    <h2>8. Changes</h2>
+    <p>
+      We may update this policy. The current version is always on this page, with the
+      date of last update shown at the top.
+    </p>
+
+    <p style="margin-top:32px;">
+      <a href="/en" class="btn btn-primary">Back to homepage</a>
+    </p>
+  </main>
+</BaseLayout>
+
+<style>
+  .legal {
+    max-width: 760px;
+    padding-top: 120px;
+    padding-bottom: 96px;
+  }
+  .legal h2 {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin: 40px 0 12px;
+    color: var(--paper);
+  }
+  .legal p,
+  .legal li {
+    color: var(--mist);
+    font-size: 1.02rem;
+    line-height: 1.8;
+  }
+  .legal ul {
+    padding-left: 20px;
+    display: grid;
+    gap: 10px;
+  }
+  .legal strong {
+    color: var(--paper);
+  }
+  .legal a {
+    color: var(--sand);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>

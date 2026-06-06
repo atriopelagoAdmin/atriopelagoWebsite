@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="404 — strony nie znaleziono | Atriopelago"
+  description="Ta strona nie istnieje albo została przeniesiona."
+  lang="pl"
+  altPath="/"
+>
+  <main
+    id="main"
+    tabindex="-1"
+    class="section container"
+    style="min-height:68vh;display:flex;flex-direction:column;justify-content:center;gap:22px;"
+  >
+    <span class="eyebrow">Błąd 404</span>
+    <h1 class="display">Tej strony tu nie ma.</h1>
+    <p class="lead">
+      Możliwe, że link jest stary albo w adresie wkradła się literówka.
+      Wróć na stronę główną — stamtąd trafisz wszędzie.
+    </p>
+    <p>
+      <a href="/" class="btn btn-primary">Wróć na stronę główną</a>
+    </p>
+  </main>
+</BaseLayout>

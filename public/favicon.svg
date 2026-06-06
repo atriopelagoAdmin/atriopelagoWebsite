@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 64 64" role="img" aria-label="Atriopelago">
+  <rect x="0" y="0" width="64" height="64" rx="13" ry="13" fill="#1a1612"/>
+  <text x="32" y="33" fill="#d8c6a2"
+        font-family="'Cormorant Garamond', 'Cormorant', Georgia, 'Times New Roman', serif"
+        font-size="46" font-weight="500" text-anchor="middle" dominant-baseline="central">A</text>
+</svg>

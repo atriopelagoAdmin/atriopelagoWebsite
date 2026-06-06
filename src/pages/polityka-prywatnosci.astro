@@ -1,0 +1,120 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Polityka prywatności | Atriopelago"
+  description="Jak Atriopelago przetwarza dane osobowe: formularz kontaktowy, analityka, Twoje prawa wynikające z RODO."
+  lang="pl"
+  altPath="/"
+>
+  <main id="main" tabindex="-1" class="section container legal">
+    <span class="eyebrow">Dokument</span>
+    <h1 class="display">Polityka prywatności</h1>
+    <p class="lead">Ostatnia aktualizacja: 3 czerwca 2026.</p>
+
+    <h2>1. Administrator danych</h2>
+    <p>
+      Administratorem Twoich danych osobowych jest Atriopelago. W sprawach
+      dotyczących danych osobowych skontaktuj się z nami pod adresem
+      <a href="mailto:officepelago@gmail.com">officepelago@gmail.com</a>.
+    </p>
+
+    <h2>2. Jakie dane zbieramy</h2>
+    <ul>
+      <li>
+        <strong>Formularz kontaktowy:</strong> imię, adres e-mail, nazwa obiektu
+        oraz treść wiadomości, które podajesz dobrowolnie, aby się z nami skontaktować.
+      </li>
+      <li>
+        <strong>Analityka (Umami):</strong> anonimowe, zagregowane statystyki odwiedzin
+        (liczba wizyt, strona wejścia, kraj, typ urządzenia). Umami nie używa plików cookie
+        i nie zbiera danych pozwalających Cię zidentyfikować.
+      </li>
+    </ul>
+
+    <h2>3. Cele i podstawy prawne</h2>
+    <ul>
+      <li>
+        Obsługa Twojego zapytania z formularza — art. 6 ust. 1 lit. b RODO
+        (czynności zmierzające do zawarcia umowy) oraz lit. f (nasz uzasadniony interes
+        w odpowiadaniu na kontakt).
+      </li>
+      <li>
+        Statystyka i poprawa działania strony — art. 6 ust. 1 lit. f RODO
+        (uzasadniony interes), na danych anonimowych.
+      </li>
+    </ul>
+
+    <h2>4. Pliki cookie</h2>
+    <p>
+      Ta strona nie używa plików cookie do śledzenia ani marketingu. Narzędzie analityczne
+      Umami działa bez cookies, dlatego nie wyświetlamy banera zgody na cookies. Jeśli
+      w przyszłości dodamy narzędzia reklamowe (np. piksel Meta), poprosimy Cię wcześniej o zgodę.
+    </p>
+
+    <h2>5. Jak długo przechowujemy dane</h2>
+    <p>
+      Dane z formularza przechowujemy przez czas niezbędny do obsługi zapytania, a następnie
+      przez okres przedawnienia ewentualnych roszczeń. Dane analityczne są anonimowe i zagregowane.
+    </p>
+
+    <h2>6. Odbiorcy danych</h2>
+    <p>
+      Korzystamy z zaufanych dostawców, którzy przetwarzają dane w naszym imieniu:
+      hosting strony (Netlify) oraz analityka (Umami). Nie sprzedajemy Twoich danych.
+    </p>
+
+    <h2>7. Twoje prawa</h2>
+    <p>
+      Masz prawo do: dostępu do danych, ich sprostowania, usunięcia, ograniczenia przetwarzania,
+      przenoszenia danych, wniesienia sprzeciwu wobec przetwarzania oraz wniesienia skargi do
+      Prezesa Urzędu Ochrony Danych Osobowych (PUODO). Aby skorzystać z tych praw, napisz na
+      <a href="mailto:officepelago@gmail.com">officepelago@gmail.com</a>.
+    </p>
+
+    <h2>8. Zmiany polityki</h2>
+    <p>
+      Możemy aktualizować tę politykę. Aktualna wersja zawsze znajduje się na tej stronie,
+      z datą ostatniej aktualizacji u góry.
+    </p>
+
+    <p style="margin-top:32px;">
+      <a href="/" class="btn btn-primary">Wróć na stronę główną</a>
+    </p>
+  </main>
+</BaseLayout>
+
+<style>
+  .legal {
+    max-width: 760px;
+    padding-top: 120px;
+    padding-bottom: 96px;
+  }
+  .legal h2 {
+    font-family: var(--font-display);
+    font-size: 1.7rem;
+    font-weight: 600;
+    margin: 40px 0 12px;
+    color: var(--paper);
+  }
+  .legal p,
+  .legal li {
+    color: var(--mist);
+    font-size: 1.02rem;
+    line-height: 1.8;
+  }
+  .legal ul {
+    padding-left: 20px;
+    display: grid;
+    gap: 10px;
+  }
+  .legal strong {
+    color: var(--paper);
+  }
+  .legal a {
+    color: var(--sand);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+</style>
